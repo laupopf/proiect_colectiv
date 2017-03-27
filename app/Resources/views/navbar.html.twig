@@ -1,0 +1,36 @@
+<div class="navbar navbar-inverse navbar-static-top"> 
+    <div class="navbar-inner">
+        <a class="brand" href="{{ path('login') }}">Login</a>
+        <ul class="nav">
+            {% if var == 'Expenses' %}
+            <li class="active"><a href="{{ path('register') }}">Register</a></li>
+            {% else %}
+            <li><a href="{{ path('register') }}">Register</a></li>
+            {% endif %}
+
+           {% if var == 'Reports' %}
+            <li class="active"><a href="#">Reports</a></li>
+            {% else %}
+            <li><a href="#">Reports</a></li>
+            {% endif %}
+
+            {% if var == 'Categories' %}
+            <li class="active"><a href="{{ path('logout') }}">Logout</a></li>
+            {% else %}
+            <li><a href="{{ path('register') }}">Categories</a></li>
+            {% endif %}
+
+            {% if var == 'Months' %}
+            <li class="active"><a href="#">Months</a></li>
+            {% else %}
+            <li><a href="#">Months</a></li>
+            {% endif %}
+
+           {% if var == 'Bank Accounts' %}
+            <li class="active"><li><a href="#">Bank Accounts</a></li>
+            {% else %}
+            <li><li><a href="#">Bank Accounts</a></li>
+            {% endif %} 
+            </ul>
+    </div>
+</div>
