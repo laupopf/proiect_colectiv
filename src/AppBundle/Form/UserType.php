@@ -19,7 +19,7 @@ class UserType extends AbstractType
             ->add('surename', TextType::class)
             ->add('cnp', TextType::class)
             ->add('phoneNumber' ,\Symfony\Component\Form\Extension\Core\Type\NumberType::class)
-            ->add('dataNastere' , \Symfony\Component\Form\Extension\Core\Type\DateTimeType::class)
+            ->add('dataNastere' , \Symfony\Component\Form\Extension\Core\Type\BirthdayType::class)
             ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'first_options' => ['label' => 'Password'],
