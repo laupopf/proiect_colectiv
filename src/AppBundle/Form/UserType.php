@@ -16,6 +16,10 @@ class UserType extends AbstractType
         $builder
             ->add('name', TextType::class)
             ->add('email', EmailType::class)
+            ->add('surename', TextType::class)
+            ->add('cnp', TextType::class)
+            ->add('phoneNumber' ,\Symfony\Component\Form\Extension\Core\Type\NumberType::class)
+            ->add('dataNastere' , \Symfony\Component\Form\Extension\Core\Type\DateTimeType::class)
             ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'first_options' => ['label' => 'Password'],
