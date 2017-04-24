@@ -14,19 +14,23 @@ class ListController extends Controller
 	*/
     public function showAction(Request $request)
     {
-        $characters = [
-          'Daenerys Targaryen' => 'Emilia Clarke',
-          'Jon Snow'           => 'Kit Harington',
-          'Arya Stark'         => 'Maisie Williams',
-          'Melisandre'         => 'Carice van Houten',
-          'Khal Drogo'         => 'Jason Momoa',
-          'Tyrion Lannister'   => 'Peter Dinklage',
-          'Ramsay Bolton'      => 'Iwan Rheon',
-          'Petyr Baelish'      => 'Aidan Gillen',
-          'Brienne of Tarth'   => 'Gwendoline Christie',
-          'Lord Varys'         => 'Conleth Hill'
-        ];
+        $usr = $this->get('security.token_storage')->getToken()->getUser();
+        
+        if ($usr != "anon.")
+        {
+        var_dump($usr->getRole());
+        
+        $information = [
+          $usr->getName(),
+          $usr->getSurename(),
+          $usr->getCnp(),
+          $usr->getPhoneNumber(),
+          $usr->getEmail(),
+          $usr->getSalar(),
+          $usr->getRole()];
 
-        return $this->render('default/index.html.twig', array('character' => $characters));
+        return $this->render('default/index.html.twig', array('character' => $information));
+    }
+    return $this->render('default/index.html.twig');
     }
 }

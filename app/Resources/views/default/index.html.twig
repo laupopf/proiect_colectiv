@@ -10,6 +10,7 @@
                 <div class="panel-heading">List of Game of Thrones Characters</div>
 {% include 'navbar.html.twig' with {'var':'Categories'} %}
                 {% if app.user != null %}
+                Welcome {{ app.user.email}}
                   <table class="table">
                       <tr>
                           <th>Character</th>
@@ -23,7 +24,7 @@
                       {% endfor %}
                   </table>
                 {% endif %}
-
+                
 
             </div>
 
