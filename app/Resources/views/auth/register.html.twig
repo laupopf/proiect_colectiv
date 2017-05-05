@@ -3,74 +3,50 @@
 
 
 {% block body %}
-<div class="container">
-  <div class="row">
-    <div class="col-md-8 col-md-offset-2">
-        <div class="panel panel-default">
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/login.css') }}" type="text/css" />
+{% endblock %}
+
+<div id="login">
           <div class="panel-heading">Register</div>
           <div class="panel-body">
             {{ form_start(form) }}
-            <div class="form_group">
-                <div class="col-md-8 col-md-offset-2">
+            
                   {{ form_row(form.name, {'attr': {'class': 'form-control'}}) }}
-                </div>
-            </div>
+               
 
-            <div class="form_group">
-                <div class="col-md-8 col-md-offset-2">
+            
                 {{ form_row(form.email, {'attr': {'class': 'form-control'}}) }}
-                </div>
-            </div>
+              
             
-             <div class="form_group">
-                <div class="col-md-8 col-md-offset-2">
+             
                 {{ form_row(form.cnp, {'attr': {'class': 'form-control'}}) }}
-                </div>
-            </div>
+              
             
-             <div class="form_group">
-                <div class="col-md-8 col-md-offset-2">
+           
                 {{ form_row(form.dataNastere, {'attr': {'class': 'form-control'}}) }}
-                </div>
-            </div>
+             
             
-             <div class="form_group">
-                <div class="col-md-8 col-md-offset-2">
                 {{ form_row(form.phoneNumber, {'attr': {'class': 'form-control'}}) }}
-                </div>
-            </div>   
+              
              
                 
-                 <div class="form_group">
-                <div class="col-md-8 col-md-offset-2">
+                
                 {{ form_row(form.surename, {'attr': {'class': 'form-control'}}) }}
-                </div>
-            </div>
+              
 
 
-            <div class="form_group">
-                <div class="col-md-8 col-md-offset-2">
+            
                 {{ form_row(form.plainPassword.first, {'attr': {'class': 'form-control'}}) }}
-                </div>
-            </div>
+            
 
-            <div class="form_group">
-                <div class="col-md-8 col-md-offset-2">
+            
                 {{ form_row(form.plainPassword.second, {'attr': {'class': 'form-control'}}) }}
-              </div>
-            </div>
-
-            <div class="form-group">
-                <div class="col-md-8 col-md-offset-4" style="margin-top:5px;">
-                    <button type="submit" class="btn btn-primary">
-                        <i class="fa fa-btn fa-user"></i> Register
-                    </button>
-                </div>
-            </div>
+             
+            <div class="col-md-6 col-md-offset-4">
+            <input type="submit" value="Login">
+        </div>
             {{ form_end(form) }}
           </div>
         </div>
-    </div>
-  </div>
-</div>
 {% endblock %}

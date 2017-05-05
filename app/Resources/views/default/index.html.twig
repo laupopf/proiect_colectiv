@@ -1,31 +1,70 @@
 {% extends 'base.html.twig' %}
 
-
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/main.css') }}" type="text/css" />
+{% endblock %}
 
 {% block body %}
 <div class="container">
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-success">
-                <div class="panel-heading">List of Game of Thrones Characters</div>
-{% include 'navbar.html.twig' with {'var':'Categories'} %}
+
+
                 {% if app.user != null %}
-                Welcome {{ app.user.email}}
-                  <table class="table">
-                      <tr>
-                          <th>Character</th>
-                          <th>Real Name</th>
-                      </tr>
+                    {% include 'navbar.html.twig' with {'var':'true', 'user': app.user.email}  %}
+                    
+                    {% if character.1 is defined %}
+                        <h2> Tabel cu toti angajatii</h2>
+                        <table class="table">
+                            <tr>
+                                <th>Nume</th>
+                                <th>Prenume</th>
+                                <th>Adresa Email</th>
+                                <th>Numar de telefon</th>
+                                <th>Data incheiere contract</th>
+                                <th>Cerere in curs de procesare</th>
+                            </tr>
 
-                      {% for key, item in character %}
-                        <tr>
-                          <td>{{ key }}</td><td>{{ item }}</td>
-                        </tr>
-                      {% endfor %}
-                  </table>
-                {% endif %}
-                
+                        {% for key, item in character %}
+                            <tr>
+                                <td>{{ item.name }}</td>
+                                <td>{{ item.surename }}</td>
+                                <td>{{ item.email }}</td>
+                                <td>{{ item.phone_number }}</td>
+                                <td>{{ item.sf_contract }}</td>
+                                <td>{{ item.cerere }}</td>
+                            </tr>
+                        {% endfor %}
+                        </table>
+                    
+                    {% else %}
+                      
+                        <table class="table">
+                            <tr>
+                                <th>Nume</th>
+                                <th>Prenume</th>
+                                <th>Adresa Email</th>
+                                <th>Numar de telefon</th>
+                                <th>Data incheiere contract</th>
+                                <th>Cerere in curs de procesare</th>
+                            </tr>
 
+                        {% for key, item in character %}
+                            <tr>
+                                <td>{{ item.name }}</td>
+                                <td>{{ item.surename }}</td>
+                                <td>{{ item.email }}</td>
+                                <td>{{ item.phone_number }}</td>
+                                <td>{{ item.sf_contract }}</td>
+                                <td>{{ item.cerere }}</td>
+                            </tr>
+                        {% endfor %}
+                        </table>
+                     {% endif %}
+                {% else %}
+                    {% include 'navbar.html.twig' with {'var':'false'} %}
+                {%endif %}
             </div>
 
             {% if app.user == null %}

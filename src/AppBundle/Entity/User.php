@@ -48,7 +48,7 @@ class User implements UserInterface
     /**
      * @var int
      *
-     * @ORM\Column(name="cnp", type="integer", unique=true)
+     * @ORM\Column(name="cnp", type="bigint", unique=true)
      */
     private $cnp;
     
