@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 
 class ListController extends Controller
@@ -15,8 +16,16 @@ class ListController extends Controller
     public function showAction(Request $request)
     {
         $usr = $this->get('security.token_storage')->getToken()->getUser();
+        
+        
+        
         if ($usr != "anon.")
         {
+            $cnp = $usr->getCnp();
+            // set and get session attributes
+            $session = $request->getSession();
+            $session->set('logged', $cnp);
+            
             $conn = $this->get('database_connection');
             if ($usr->getRole() == "ROLE_USER")
             {
