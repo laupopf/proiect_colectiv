@@ -24,6 +24,7 @@
                                 <th>Numar de telefon</th>
                                 <th>Data incheiere contract</th>
                                 <th>Cerere in curs de procesare</th>
+                                <th>Proceseaza cerere</th>
                             </tr>
 
                         {% for key, item in character %}
@@ -34,6 +35,7 @@
                                 <td>{{ item.phone_number }}</td>
                                 <td>{{ item.sf_contract }}</td>
                                 <td>{{ item.cerere }}</td>
+                                <td> proceseaza </td>
                             </tr>
                         {% endfor %}
                         </table>

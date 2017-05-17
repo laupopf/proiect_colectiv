@@ -9,6 +9,40 @@
 {% if app.user != null %}
                     {% include 'navbar.html.twig' with {'var':'true', 'user': app.user.email}  %}
                     
+                    {% if app.user.cerere == 0 %}
+                    <h2> Tipuri de cereri</h2>
+                        <table class="table">
+                            <tr>
+                                <th>Cerere tip</th>
+                                <th>Descriere cerere</th>
+                            </tr>
+                            <tr>
+                                <th><td> Cerere de concediu <form action="{{path('cerere')}}" method="post">
+                                    <input type="checkbox" name="message-checkbox[]" id="{{app.user.id}}" value="{{1}}" />
+                                    <input class="messages-received-delete-selected1" type="submit" value="{{'Adauga cerere'}}"/>
+                                    </form></td></th>
+                                <th> <td>Adeverinta de venit <form action="{{path('cerere')}}" method="post">
+                                    <input type="checkbox" name="message-checkbox[]" id="{{app.user.id}}" value="{{2}}" />
+                                    <input class="messages-received-delete-selected1" type="submit" value="{{'Adauga cerere'}}"/>
+                                    </form></td></th>
+                               
+                                <th> <td>Copie contract de angajare <form action="{{path('cerere')}}" method="post">
+                                    <input type="checkbox" name="message-checkbox[]" id="{{app.user.id}}" value="{{3}}" />
+                                    <input class="messages-received-delete-selected1" type="submit" value="{{'Adauga cerere'}}"/>
+                                    </form></td> </th>
+                                <th><td>
+                                    <form action="{{path('cerere')}}" method="post">
+                                    <input type="checkbox" name="message-checkbox[]" id="{{app.user.id}}" value="{{app.user.id}}" />
+                                    <input class="messages-received-delete-selected1" type="submit" value="{{'Adauga cerere'}}"/>
+                                    </form>
+                                    </td></th>
+                            </tr>
+                            {%else%}
+                                Cerere in curs de procesare , tipul cereri :{% if app.user.cerere == 1%} Cerere de concediu {%endif%}
+                                                                            {% if app.user.cerere == 2%} Adeverinta de venit{%endif%}
+                                                                            {% if app.user.cerere == 3%} Copie contract de angajare {%endif%}
+                    {% endif %}
+                    {{ app.user.cerere}}
                     {{character}}
                     {% endif %}
                     
