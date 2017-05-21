@@ -51,8 +51,8 @@ li a:hover {
 
             {% if var == 'true' %}
                 <li class="active"><a href="{{ path('pontaj') }}">Pontaj</a></li>
-            {% else %}
-                <li><a href="#">Months</a></li>
+            
+                <li><a href="{{ path('alert') }}">Alerte</a></li>
             {% endif %}
 
             {% if var == 'Bank Accounts' %}

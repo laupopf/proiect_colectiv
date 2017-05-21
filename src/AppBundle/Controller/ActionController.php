@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 use AppBundle\Entity\User;
-
+use AppBundle\Entity\Alert;
 
 class ActionController extends Controller
 {
@@ -20,16 +20,20 @@ class ActionController extends Controller
         $user = $session->get('logged');
         
         $msg_id = $request->request->get('message-checkbox');
-        var_dump($msg_id);
+      //  var_dump($msg_id);
         
         if ($msg_id != NULL){
-        $em = $this->getDoctrine()->getEntityManager();
-        
-        $item = $em->getRepository('AppBundle\Entity\User')->find($user);
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository('AppBundle:User');
+    
+         $event = $repo->findOneBy(array(
+            'cnp' => $user,
+         ));
+        $event->setCerere($msg_id[0]);
 
         
         //$item->setCerere($msg_id);
-
+        $em->persist($event);
         $em->flush();
         }
         $info = $user;
@@ -46,6 +50,59 @@ class ActionController extends Controller
        
         $info = $user;
         return $this->render('functions/pontaj.html.twig', array('character' => $info));
+    }
+    
+    /**
+     * @Route("/alert", name="alert")
+     */
+    public function alertAction(Request $request) {
+       
+        $em = $this->getDoctrine()->getManager();
+        $alert_repo = $em->getRepository('AppBundle:Alert');
+    
+        //
+        $result=  $alert_repo->createQueryBuilder('u')
+                 ->select('u.name')
+                 ->orderBy('u.id', 'DESC')
+                 ->getQuery()
+                 ->getArrayResult();
+    
+        
+        $info = $result;
+       // var_dump($result);
+        return $this->render('functions/alert.html.twig', array('character' => $info));
+    }
+    
+    /**
+     * @Route("/alertup", name="alertup")
+     */
+    public function AlertUpdAction(Request $request) {
+        $session = $request->getSession();
+        $user = $session->get('logged');
+        $em1 = $this->getDoctrine()->getManager();
+        $repo = $em1->getRepository('AppBundle:User');
+    
+        $event = $repo->findOneBy(array(
+            'cnp' => $user,
+        ));
+        $rol = $event->getRole();
+        //var_dump($rol);
+        $em = $this->getDoctrine()->getManager();
+        $msg_alert = $request->request->get('text_alert');
+        var_dump($msg_alert);
+        
+        if ($rol == 'ROLE_HR' || $rol == 'ROLE_ADMIN')
+        {
+            if ($msg_alert != NULL)
+            {
+                $alerta_noua = new Alert();
+                $alerta_noua->setName($msg_alert);
+           
+                $em->persist($alerta_noua);
+                $em->flush();
+            }
+        }
+          return $this->redirect($this->generateUrl('alert'));
     }
 }
 

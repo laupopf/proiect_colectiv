@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/main.css') }}" type="text/css" />
+{% endblock %}
+
+{% block body %}
+
+{% if app.user != null %}
+                    {% include 'navbar.html.twig' with {'var':'true', 'user': app.user.email}  %}
+                    {% if (app.user.role == 'ROLE_HR' or app.user.role == 'ROLE_ADMIN')%}
+                        Adauga alerte noi
+                        <form action="{{path('alertup')}}" method="post">
+                                    
+                                    <input type="text" id="{{app.user.cnp}}" name="text_alert">
+                                    <input type="submit" value="{{'Adauga alerta'}}"/>
+                        </form>
+                    {% endif %}
+                    {% for type, flash_messages in app.session.flashBag.all %}
+                        {% for flash_message in flash_messages %}
+                            <div class="flash-{{ type }}">
+                                {{ flash_message }}
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
+                    
+                    {{character[0]['name']}}<BR>
+                    {{character[1]['name']}}<br>
+                    {{character[2]['name']}}<br>
+                    {% endif %}
+                    
+                    
+{% endblock %}
