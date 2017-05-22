@@ -9,6 +9,12 @@
 {% if app.user != null %}
                     {% include 'navbar.html.twig' with {'var':'true', 'user': app.user.email}  %}
                     
+                    <form action="{{path('pontaj')}}" method="post">
+                        Ore lucrate pe ziua de azi:<BR>
+                                    <input type="text" id="{{app.user.cnp}}" name="pontaj">
+                                    <input type="submit" value="{{'Adauga ore de lucru'}}"/>
+                    </form>
+                    
                     {{character}}
                     {% endif %}
                     

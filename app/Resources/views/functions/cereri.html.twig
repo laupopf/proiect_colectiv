@@ -38,7 +38,9 @@
                                                                             {% if app.user.cerere == 3%} Copie contract de angajare {%endif%}
                     {% endif %}
                     
-                   
+                        {% if link != NULL %}
+                            <a href="{{asset(link)}}">Download cerere existenta</a>
+                        {%endif%}
                     {% endif %}
                     
                     

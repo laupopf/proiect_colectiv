@@ -12,8 +12,9 @@
 
 
                 {% if app.user != null %}
-                    {% include 'navbar.html.twig' with {'var':'true', 'user': app.user.email}  %}
-                    
+                  
+                    {% include 'navbar.html.twig' with {'var':'true', 'user': app.user.email , 'alert': alert  }  %}
+                   
                     {% if character.1 is defined %}
                         <h2> Tabel cu toti angajatii</h2>
                         <table class="table">
@@ -35,12 +36,14 @@
                                 <td>{{ item.phone_number }}</td>
                                 <td>{{ item.sf_contract }}</td>
                                 <td>{{ item.cerere }}</td>
-                                <td> 
+                                <td> {%if (item.cerere == 0 or item.cerere == null)%}
+                                    {%else%}
                                     <form action="{{path('solvCerere')}}" method="post">
                                         <input type="checkbox" id="{{app.user.cnp}}" name="solvCerere" value="{{item.cerere}}" >
                                         <input type="hidden" id="{{app.user.cnp}}" name="userCerere" value="{{item.cnp}}" >
                                         <input type="submit" value="{{'Proceseaza cerere'}}"/>
                                     </form>
+                                    {%endif%}
                                 </td>
                             </tr>
                         {% endfor %}

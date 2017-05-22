@@ -66,6 +66,16 @@ li a:hover {
             <li class = "cals">
                 
                 Buna {{user}}!
+                {% for flash_message in app.session.flashBag.get('notice') %}
+                    <div class="flash-notice">
+                        <br><b> Ai o alerta :
+                        <br></b>
+                        <BR> <H1>{{alert[0]["name"]}}</H1>
+                     </div>
+                {% endfor %}
+                    
+                
+                
             </li>
             {% endif %}
             </ul>

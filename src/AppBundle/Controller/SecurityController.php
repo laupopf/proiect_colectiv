@@ -14,7 +14,11 @@ class SecurityController extends Controller
     public function loginAction(Request $request)
     {
        $helper = $this->get('security.authentication_utils');
-
+       
+       $this->addFlash(
+            'notice',
+            'Your changes were saved!');
+       
        return $this->render(
            'auth/login.html.twig',
            array(

@@ -6,6 +6,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
+use AppBundle\Entity\Alert;
 
 
 class ListController extends Controller
@@ -21,6 +22,22 @@ class ListController extends Controller
         
         if ($usr != "anon.")
         {
+             
+            
+            $em = $this->getDoctrine()->getManager();
+            $alert_repo = $em->getRepository('AppBundle:Alert');
+    
+        
+            $result=  $alert_repo->createQueryBuilder('u')
+                 ->select('u.name')
+                 ->orderBy('u.id', 'DESC')
+                 ->getQuery()
+                 ->getArrayResult();
+    
+        
+            $info = $result;
+            
+            
             $cnp = $usr->getCnp();
             // set and get session attributes
             $session = $request->getSession();
@@ -40,9 +57,9 @@ class ListController extends Controller
             {
                 $users= $conn->fetchAll('select * from user');
                 
-                    return $this->render('default/index.html.twig', array('character' => $users));
+                    return $this->render('default/index.html.twig', array('character' => $users , 'alert' => $info));
             }
-        return $this->render('default/index.html.twig', array('character' => $information));
+        return $this->render('default/index.html.twig', array('character' => $information, 'alert' => $info));
     }
     return $this->render('default/index.html.twig');
     }
