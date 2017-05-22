@@ -8,6 +8,8 @@ use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 use AppBundle\Entity\User;
 use AppBundle\Entity\Alert;
+use AppBundle\Entity\FPDF;
+
 
 class ActionController extends Controller
 {
@@ -89,7 +91,7 @@ class ActionController extends Controller
         //var_dump($rol);
         $em = $this->getDoctrine()->getManager();
         $msg_alert = $request->request->get('text_alert');
-        var_dump($msg_alert);
+       
         
         if ($rol == 'ROLE_HR' || $rol == 'ROLE_ADMIN')
         {
@@ -103,6 +105,35 @@ class ActionController extends Controller
             }
         }
           return $this->redirect($this->generateUrl('alert'));
+    }
+    
+    /**
+     * @Route("/solvCerere", name="solvCerere")
+     */
+    public function solvCerereAction(Request $request)
+    {
+        $msg_alert = $request->request->get('solvCerere');
+        $user = $request->request->get('userCerere');
+        
+        $em1 = $this->getDoctrine()->getManager();
+        $repo = $em1->getRepository('AppBundle:User');
+    
+        $event = $repo->findOneBy(array(
+            'cnp' => $user,
+        ));
+        $nume = $event->getName();
+        $surename = $event->getEmail();
+        
+
+        $pdf = new FPDF();
+        $pdf->AddPage();
+        $pdf->SetFont('Arial','B',16);
+        $pdf->Cell(40,10,$nume);
+        $pdf->Write('1', $surename);
+        $pdf->Output(); 
+        var_dump($user);
+        var_dump($msg_alert);die;
+        
     }
 }
 
